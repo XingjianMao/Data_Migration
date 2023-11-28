@@ -1,0 +1,22 @@
+{
+    "sample_num": 10000,
+
+    "cluster_size": 5,
+    "Pre_process": true,
+    "Pre_process_numerical_col" : [0, 1, 2, 3, 4, 7, 10, 11, 12, 13, 17, 19],
+    "data_path" : "Dataset/Original_data/flight.csv",
+    "delimiter" : "|",
+
+    "n_jobs" : -1,
+    "max_iter" : 5,
+    "n_init" : 5,
+    "Cat_col" : [5, 6, 8, 9, 14, 15, 16, 18],
+
+    "sample_seed" : 67,
+    "cluster_seed" : 67,
+
+    "epsilon_3" : 0.95,
+    "epsilon_2" : 0.975,
+    "prune_threshold" : 0.4
+
+}

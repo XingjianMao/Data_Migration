@@ -1,0 +1,20 @@
+{
+    "sample_num": 10000,
+    "data_name" : "nypd",
+    "data_path" : "Dataset/Original_data/nypd.csv",
+    "Save_proto_path" : "Dataset/k_proto_clustered/nypd",
+    "Pre_process" : true,
+    "column_drop": [3, 4, 5, 6, 8, 9, 16, 19, 21, 22, 26, 32, 33, 34, 35],
+    "column_cat_col": [2, 7, 11, 13, 14, 15, 17, 20, 23, 24, 25, 27, 28, 29],
+    "n_jobs" : -1,
+    "max_iter" : 5,
+    "n_init" : 5,
+    "cluster_size": 5,
+    "sample_seed" : 67,
+    "cluster_seed" : 67,
+    "delimiter": ",",
+    "epsilon_3" : 0.95,
+    "epsilon_2" : 0.975,
+    "prune_threshold" : 0.4
+
+}
