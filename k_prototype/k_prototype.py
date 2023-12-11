@@ -74,8 +74,8 @@ def k_prototype(config_path, clustered_save_path):
 
     
 if __name__ == '__main__':
-    default_config_path = "config_folder/config_nypd.json"
-    default_save_path = "Dataset/k_prototype_clustered"
+    default_config_path = "config_folder/config_flight.json"
+    default_save_path = "Dataset/k_proto_clustered"
     k_prototype(default_config_path, default_save_path)
 
 

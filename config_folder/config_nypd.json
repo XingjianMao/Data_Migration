@@ -15,6 +15,7 @@
     "delimiter": ",",
     "epsilon_3" : 0.95,
     "epsilon_2" : 0.975,
-    "prune_threshold" : 0.4
+    "prune_threshold" : 0.4,
+    "test_ratio" : 0.2
 
 }

@@ -152,7 +152,7 @@ def select_nodes(edges):
         return selected_nodes
 
 
-def plot_graph(G, data_name):
+def plot_graph(G, data_name, path):
     plt.figure(figsize=(15, 15))  # Set the figure size (increase if necessary)
 
     # Compute the node positions using the spring layout algorithm with adjusted spacing
@@ -164,9 +164,8 @@ def plot_graph(G, data_name):
     plt.title("Dependency Graph " + data_name)
     current_time = datetime.now().strftime("%Y-%m-%d-%H-%M")
     # Save the figure
-    folder_path = "FD_Graphs/"
-    graph_path = folder_path + data_name + current_time + ".png"
+
+    graph_path = path + '/' + data_name + current_time + ".png"
     plt.savefig(graph_path, format='png', bbox_inches='tight')
 
     # Show the plot
-    plt.show()
