@@ -40,10 +40,11 @@ def Preprocess_Classifier(df, cat_col, drop_col):
     return df
 
 def run_main():
+
     config_path = "config_folder/config_nypd.json"
     data_name, cluster_size, cat_col, col_drop, delimiter, train_ratio = Get_config_json_Classifier(config_path)
 
-    data_path = "Dataset/k_proto_clustered/k_proto_5_nypd.csv"
+    data_path = "Dataset/k_proto_clustered/k_proto_10_nypd.csv"
     df = pd.read_csv(data_path, header=0, delimiter=delimiter)
     df_processed = Preprocess_Classifier(df, cat_col, col_drop)
 
@@ -67,7 +68,7 @@ def run_main():
     }
 
     current_time = time.time()
-    folder_path = 'Classifier_result/' + data_name + str(current_time)
+    folder_path = 'Classifier_result/' + data_name + "_" + str(cluster_size) + "_" + str(current_time)
     os.makedirs(folder_path, exist_ok=True)
 
     training_times = {}

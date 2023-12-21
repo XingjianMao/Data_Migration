@@ -21,6 +21,21 @@ import os
 from Test_compress_linear import *
 from Test_compress_column import *
 
+def remove_mismatched_types(df, expected_types):
+    # Iterate over each row
+    for index, row in df.iterrows():
+        # Check each cell in the row
+        for col, expected_type in zip(row, expected_types):
+            if expected_type == 'int' and not pd.api.types.is_integer(col):
+                # Drop the row if the type is not integer
+                df.drop(index, inplace=True)
+                break
+            elif expected_type == 'str' and not isinstance(col, str):
+                # Drop the row if the type is not string
+                df.drop(index, inplace=True)
+                break
+    return df
+
 #这个就是读一下data，然后取差不多一万个sample来算FD
 def Get_data (data_path, sample_num, random_seed, delimiter):
 
@@ -95,16 +110,19 @@ def Find_FD(config_file_path):
     print(sorted_items)
     sorted_list_column = [item[0] for item in sorted_items]
     print(sorted_list_column)
-
+    
 
     #selected就是在这个FD网中取几个重要的节点，这几个节点就是用来sort整个表格的
     
-    #selected = select_nodes(FD_list)
+    selected = select_nodes_OneEachSubgraph(FD_list)
     #最后把结果放到一个json里面
 
     file_path_compress = folder_path + "/" + data_name + "_CompressResult.json"
+
+
     compress_with_FD_linear(df_original, selected, file_path_compress)
     Experiment_compress_column(df_original, selected, folder_path)
+    #column_experiment(df_original, folder_path)
 
     lists_dict = {
         "time_taken": time_taken,
@@ -124,7 +142,7 @@ def Find_FD(config_file_path):
 
 if __name__ == '__main__':
     
-    default_file_path = "config_folder/config_flight.json"
+    default_file_path = "config_folder/config_ncvoter_million.json"
     
     parser = argparse.ArgumentParser(description='the config file path of k prototype clustering')
     parser.add_argument('--config_path', type=str, default=default_file_path, help='Input string')

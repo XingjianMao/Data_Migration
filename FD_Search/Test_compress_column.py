@@ -80,3 +80,35 @@ def Experiment_compress_column(df, FD_list, save_file_path):
     result_FD_sortall_lz4.to_excel(save_file_path + "/sortall_lz4.xlsx", index=False)
     result_FD_sortall_gzip.to_excel(save_file_path + "/sortall_gzip.xlsx", index=False)
     result_FD_sortall_zstandard.to_excel(save_file_path + "/sortall_zstandard.xlsx", index=False)
+
+
+def column_experiment(df, path, filename="compression_results.xlsx"):
+    compression_methods = {
+        'gzip': get_compressed_size_Gzip,
+        'lz4': get_compressed_size_LZ4,
+        'zstandard': get_compressed_size_Zstandard
+    }
+
+    results = []
+    
+    for method_name, method_func in compression_methods.items():
+        total_compressed_size = 0
+        method_results = []
+
+        for column in df.columns:
+            sorted_df = df.sort_values(by=column)
+            column_data = sorted_df[column].to_string(index=False)
+            compressed_size = method_func(column_data)
+            total_compressed_size += compressed_size
+            method_results.append({'Column': column, 'Compressed Size (bytes)': compressed_size})
+
+        method_results.append({'Column': 'Total', f'{method_name} Compressed Size (bytes)': total_compressed_size})
+        results_df = pd.DataFrame(method_results)
+        results.append(results_df)
+
+    # Combine results into a single DataFrame
+    final_df = pd.concat(results, axis=1)
+    
+    # Save to Excel
+    final_df.to_excel(path + "/" + filename, index=False)
+    print(f"Saved compression results to {filename}")

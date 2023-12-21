@@ -59,6 +59,7 @@ def k_prototype(config_path, clustered_save_path):
     #preprocess一下，new list cat是cat col，因为预处理的时候要drop掉一些col，所以要重新弄一下
     df_pre_process, new_list_cat = preprocess_dataframe(df, list_drop, list_cat)
     #predict
+
     clusters = kp.fit_predict(df_pre_process, categorical=new_list_cat)
     end_time = time.time()
 
@@ -69,12 +70,12 @@ def k_prototype(config_path, clustered_save_path):
     df['cluster_id'] = clusters
 
     #把填上cluster id的csv保存到/Dataset/k_prototype_clustere文件夹
-    file_name = clustered_save_path + "/k_proto_" + str(cluster_size) + "_" + data_name + ".csv"
+    file_name = clustered_save_path + "/k_proto_" + str(cluster_size) + "_" + data_name  + ".csv"
     df.to_csv(file_name, index=False)
 
     
 if __name__ == '__main__':
-    default_config_path = "config_folder/config_flight.json"
+    default_config_path = "config_folder/config_nypd.json"
     default_save_path = "Dataset/k_proto_clustered"
     k_prototype(default_config_path, default_save_path)
 

@@ -1,0 +1,20 @@
+{
+    "original": {
+        "original_size": 61605898,
+        "lz4": 23628619,
+        "gzip": 12418617,
+        "zstandard": 11711662
+    },
+    "sorted_by_columns": {
+        "original_size": 63427217,
+        "lz4": 24494594,
+        "gzip": 12932227,
+        "zstandard": 12249847
+    },
+    "fully_sorted": {
+        "original_size": 63138014,
+        "lz4": 28962857,
+        "gzip": 15931418,
+        "zstandard": 14684045
+    }
+}

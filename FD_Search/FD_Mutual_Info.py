@@ -46,7 +46,7 @@ def prune_nan(df, threshold):
 def prune_data(df, eps_3, threshold):
     table_len = len(df)
     threshold_length = threshold * table_len
-    df_prune_nan = prune_nan(df, threshold)
+    df_prune_nan = prune_nan(df, threshold_length)
 
     df_prune_eps_3 = prune(df_prune_nan, eps_3, table_len)
 
@@ -127,8 +127,20 @@ def find_subgraphs(edges):
 
     return subgraphs, graph  # Return both subgraphs and the graph
 
-def select_nodes(edges):
-    subgraphs, graph = find_subgraphs(edges)  # Unpack both values
+def select_nodes_OneEachSubgraph(edges):
+    subgraphs, graph = find_subgraphs(edges)
+
+    # Select the node with the maximum degree in each subgraph
+    selected_nodes = [max(subgraph, key=lambda node: len(graph[node])) for subgraph in subgraphs]
+
+    # Sort the selected nodes based on their degree, in descending order
+    sorted_nodes = sorted(selected_nodes, key=lambda node: len(graph[node]), reverse=True)
+
+    return sorted_nodes
+
+
+def select_nodes_ThreeEachSubgraph(edges):
+    subgraphs, graph = find_subgraphs(edges) 
 
     if len(subgraphs) == 1:  # Whole graph
         node_degrees = {node: len(neighbors) for node, neighbors in graph.items()}
